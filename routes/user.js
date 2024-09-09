@@ -15,12 +15,46 @@ router.post('/', async(req, res) => {
         })
 
         const newUser = await user.save();
-        res.send({user: newUser});
+        res.send({msg: "user Added"});
     } catch (error) {
         res.send({msg: "username taken (just like your crush)"});
         console.log(error);
     }
 });
+
+router.put('/', async (req, res) => {
+    const username = req.query.username;
+    const score = req.query.score;
+    
+    try {
+        const user = await User.findOneAndUpdate(
+            { username: username },
+            { score: score },
+            { new: true }
+        );
+
+        if (user) {
+            res.send({ message: "User score updated successfully", user });
+        } else {
+            res.status(404).send({ message: "User not found" });
+        }
+    } catch (error) {
+        console.log(error);
+        res.status(500).send({ message: "Error updating user score" });
+    }
+});
+
+
+router.get('/playerScore', async(req, res) => {
+    const username = req.query.username;
+    try {
+        const user = await User.findOne({username: username});
+        res.send({score: user.score});
+    } catch (error) {
+        
+    }
+})
+
 
 router.get('/', async(req, res) => {
     try {
