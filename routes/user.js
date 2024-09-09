@@ -49,7 +49,7 @@ router.get('/playerScore', async(req, res) => {
     const username = req.query.username;
     try {
         const user = await User.findOne({username: username});
-        res.send({score: user.score});
+        res.send({score: user.score, username: user.username});
     } catch (error) {
         
     }
