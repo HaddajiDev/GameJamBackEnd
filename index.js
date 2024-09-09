@@ -17,4 +17,4 @@ app.use('/user', require("./routes/user"));
 app.get("/", (req, res) => res.send("Working"));
 
 
-app.listen(process.env.PORT)
+app.listen(process.env.PORT, () => {console.log("connected to " + process.env.PORT);})

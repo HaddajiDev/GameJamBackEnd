@@ -6,7 +6,8 @@ const User = require('../models/user');
 
 
 router.post('/', async(req, res) => {
-    const {username, score} = req.body;
+    const username = req.query.username;
+    const score = req.query.score;
     try {
         const user = new User({
             username: username,
@@ -16,7 +17,7 @@ router.post('/', async(req, res) => {
         const newUser = await user.save();
         res.send({user: newUser});
     } catch (error) {
-        res.send({msg: "taken username"});
+        res.send({msg: "username taken (just like your crush)"});
         console.log(error);
     }
 });
