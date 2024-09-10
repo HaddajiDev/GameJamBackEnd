@@ -15,7 +15,7 @@ router.post('/', async(req, res) => {
         })
 
         const newUser = await user.save();
-        res.send({msg: "user Added"});
+        res.send({msg: "user Added", id: newUser.id});
     } catch (error) {
         res.send({msg: "username taken (just like your crush)"});
         console.log(error);
