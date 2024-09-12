@@ -23,12 +23,12 @@ router.post('/', async(req, res) => {
 });
 
 router.put('/', async (req, res) => {
-    const username = req.query.username;
+    const id = req.query.id;
     const score = req.query.score;
     
     try {
-        const user = await User.findOneAndUpdate(
-            { username: username },
+        const user = await User.findByIdAndUpdate(
+            id,
             { score: score },
             { new: true }
         );
